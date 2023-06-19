@@ -17,18 +17,21 @@ public class Recipe {
     private String source;
     private String url;
     private String directions;
-    //todo add
-    //private Difficulty difficulty;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "recipe") //one Recipe has many Ingredients. The recipe
         // will be saved on the child/Ingredient property that is called "recipe"
     private Set<Ingredient> ingredients;
-
     @Lob //creates a BLOB for the image
     private Byte[] image;
-
     @OneToOne(cascade = CascadeType.ALL) //when something happens to the master class, it happens to the other
     private Notes notes;
+    @Enumerated(value = EnumType.STRING) //an enum is used. Type String uses String value instead of ordered numbers
+    private Difficulty difficulty;
+    @ManyToMany
+    @JoinTable(name = "recipe_category", //make a table called "recipe_category"
+            joinColumns = @JoinColumn(name = "recipe_id"), //join shared info on a column called "recipe_id"
+            inverseJoinColumns = @JoinColumn(name = "category_id")) //put the other info into a column "category_id"
+    private Set<Category> categories;
 
     public Long getId() {
         return id;
@@ -116,5 +119,21 @@ public class Recipe {
 
     public void setIngredients(Set<Ingredient> ingredients) {
         this.ingredients = ingredients;
+    }
+
+    public Difficulty getDifficulty() {
+        return difficulty;
+    }
+
+    public void setDifficulty(Difficulty difficulty) {
+        this.difficulty = difficulty;
+    }
+
+    public Set<Category> getCategories() {
+        return categories;
+    }
+
+    public void setCategories(Set<Category> categories) {
+        this.categories = categories;
     }
 }
