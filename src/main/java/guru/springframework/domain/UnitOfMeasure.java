@@ -2,13 +2,13 @@ package guru.springframework.domain;
 
 import javax.persistence.*;
 
-@Entity
+@Entity //represents a table in the db
 public class UnitOfMeasure {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY) //generates an id value
     private Long id;
-    private String description;
+    private String description; //will be the value identifier for the db column "description"
 
     public Long getId() {
         return id;

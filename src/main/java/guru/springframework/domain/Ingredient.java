@@ -3,20 +3,20 @@ package guru.springframework.domain;
 import javax.persistence.*;
 import java.math.BigDecimal;
 
-@Entity
+@Entity //represents a table in the db
 public class Ingredient {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY) //generates an id value
     private Long id;
 
-    private String description;
+    private String description; //will be the value identifier for the db column "description"
     private BigDecimal amount;
 
     @OneToOne(fetch = FetchType.EAGER) //tells Hibernate this is to be retrieved every time from the db
     private UnitOfMeasure uom;
 
-    @ManyToOne //many Ingredients to 1 Recipe. Not cascade because you don't want the parent object
+    @ManyToOne //many Ingredients to 1 Recipe. Not cascaded because you don't want the parent object
         // (Recipe) to be deleted if an ingredient gets deleted
     private Recipe recipe;
 

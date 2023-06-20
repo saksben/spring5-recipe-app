@@ -2,11 +2,11 @@ package guru.springframework.domain;
 
 import javax.persistence.*;
 
-@Entity
+@Entity //represents a table in the db
 public class Notes {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY) //generates an id value
     private Long id;
 
     @OneToOne

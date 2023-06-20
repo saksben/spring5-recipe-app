@@ -3,14 +3,15 @@ package guru.springframework.domain;
 import javax.persistence.*;
 import java.util.Set;
 
-@Entity
+@Entity //represents a table in the db
 public class Recipe {
+    //variables are different columns on the db
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY) //generates an id value
     private Long id;
 
-    private String description;
+    private String description; //will be the value identifier for the db column "description"
     private Integer prepTime;
     private Integer cookTime;
     private Integer servings;
@@ -19,7 +20,8 @@ public class Recipe {
     private String directions;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "recipe") //one Recipe has many Ingredients. The recipe
-        // will be saved on the child/Ingredient property that is called "recipe"
+        // will be saved on the child/Ingredient property that is called "recipe". When something happens to
+        //the master class, it happens to the other
     private Set<Ingredient> ingredients;
     @Lob //creates a BLOB for the image
     private Byte[] image;
